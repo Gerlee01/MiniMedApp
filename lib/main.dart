@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mini_med_front/component/user/controller/UserController.dart';
 
-import './entity/user.dart';
 ///love
 void main() {
   runApp(MyApp());
@@ -16,34 +16,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
-            title: TextStyle(fontSize: 20),
-          ),
+                title: TextStyle(fontSize: 20),
+              ),
         ),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  final User user = User(userName: "gerlee", password: "b@g");
-
   final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  void _checkUser() {
-    if (_userNameController.text.isEmpty || _passwordController.text.isEmpty) {
-      return;
-    }
-
-    final inputUserName = _userNameController.text;
-    final inputPassword = _passwordController.text;
-
-    if (inputUserName == user.userName && inputPassword == user.password) {
-      user.printUser("kk");
-      print("Амжилттай нэвтэрлээ");
-    } else {
-      print("Нэвтрэх нэр нууц үг таарсангүй");
-    }
+  void _submit() {
+    UserController userController = UserController();
+    userController.findByUsernameAndPassword(_userNameController.text, _passwordController.text);
   }
 
   @override
@@ -64,7 +52,7 @@ class MyHomePage extends StatelessWidget {
           ),
           RaisedButton(
             child: Text("Нэвтрэх"),
-            onPressed: _checkUser,
+            onPressed: _submit,
             color: Theme.of(context).primaryColor,
             textColor: Colors.white,
           ),
