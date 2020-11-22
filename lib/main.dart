@@ -39,6 +39,7 @@ class MyHomePage extends StatelessWidget {
     final inputPassword = _passwordController.text;
 
     if (inputUserName == user.userName && inputPassword == user.password) {
+      user.printUser("kk");
       print("Амжилттай нэвтэрлээ");
     } else {
       print("Нэвтрэх нэр нууц үг таарсангүй");
