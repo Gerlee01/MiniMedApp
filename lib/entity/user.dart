@@ -8,4 +8,8 @@ class  User {
     @required this.userName,
     @required this.password,
   });
+
+  void printUser(String user){
+    print(user);
+  }
 }
