@@ -31,7 +31,7 @@ class MyHomePage extends StatelessWidget {
 
   void _submit() {
     UserController userController = UserController();
-    userController.findByUsernameAndPassword(_userNameController.text, _passwordController.text);
+    userController.findByUsernameAndPassword(_userNameController.text, _passwordController.text).then((value) => print(value.username));
   }
 
   @override

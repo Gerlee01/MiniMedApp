@@ -27,6 +27,6 @@ class User {
         username: json['username'] as String,
         password: json['password'] as String,
         roles: new List<String>.from(json['roles']),
-        created: json['created'] as DateTime);
+        created: json['created'] as String);
   }
 }
