@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class User {
-  int id;
+  BigInt id;
   String uuid;
   String parentUuid;
   final String username;

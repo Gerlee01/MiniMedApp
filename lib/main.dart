@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mini_med_front/component/user/controller/UserController.dart';
+import './screens/pill_detail.dart';
+import './screens/tabs_screen.dart';
+import './screens/login_screen.dart';
 
-///love
+///love me too
 void main() {
   runApp(MyApp());
 }
@@ -11,9 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Login App',
-      home: MyHomePage(),
+      home: LoginScreen(),
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.pink,
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(fontSize: 20),
@@ -21,43 +23,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  final _userNameController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  void _submit() {
-    UserController userController = UserController();
-    userController.findByUsernameAndPassword(_userNameController.text, _passwordController.text).then((value) => print(value.username));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Mini Med Login"),
-      ),
-      body: Column(
-        children: <Widget>[
-          TextField(
-            decoration: InputDecoration(labelText: "Нэвтрэх нэр"),
-            controller: _userNameController,
-          ),
-          TextField(
-            decoration: InputDecoration(labelText: "Нууц үг"),
-            controller: _passwordController,
-          ),
-          RaisedButton(
-            child: Text("Нэвтрэх"),
-            onPressed: _submit,
-            color: Theme.of(context).primaryColor,
-            textColor: Colors.white,
-          ),
-        ],
-      ),
+      routes: {
+        TabsScreen.routeName: (ctx) => TabsScreen(),
+        PillDetail.routeName: (ctx) => PillDetail(),
+      },
     );
   }
 }
