@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../entity/History.dart';
-import '../../widgets/history_item.dart';
+import '../../widgets/history_grid_item.dart';
 
 class HistoryScreen extends StatelessWidget {
-  List<Map<String, Object>> types = [
+  final List<Map<String, Object>> types = [
     {
       'type': Type.ambulatory,
       'title': 'Эмчийн үзлэг',
@@ -27,7 +27,7 @@ class HistoryScreen extends StatelessWidget {
         alignment: Alignment.center,
         child: GridView(
           padding: EdgeInsets.all(30),
-          children: types.map((e) => HistoryItem(e['type'], e['title'])).toList(),
+          children: types.map((e) => HistoryGridItem(e['type'], e['title'])).toList(),
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
             childAspectRatio: 3 / 2,

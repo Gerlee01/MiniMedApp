@@ -1,53 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mini_med_front/providers/pill_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../entity/Prescription.dart';
 import '../pill_sub/pill_detail.dart';
 
 class PillScreen extends StatelessWidget {
-  final List<Prescription> pills = [
-    Prescription(
-      id: BigInt.one,
-      patientID: BigInt.one,
-      hospitalID: BigInt.one,
-      pillName: 'em',
-      guide: 'haha',
-      doctorFullName: 'doctor name',
-      doctorWorkPlace: 'emch',
-      doctorRegNum: 'yu12354678',
-      type: Type.normal,
-      created: DateTime.now(),
-    ),
-    Prescription(
-      id: BigInt.two,
-      patientID: BigInt.two,
-      hospitalID: BigInt.two,
-      pillName: 'em22',
-      guide: 'haha',
-      doctorFullName: 'doctor name',
-      doctorWorkPlace: 'emch',
-      doctorRegNum: 'yu12354678',
-      type: Type.setgets,
-      created: DateTime.now(),
-    ),
-    Prescription(
-      id: BigInt.from(6),
-      patientID: BigInt.from(6),
-      hospitalID: BigInt.from(6),
-      pillName: 'em3',
-      guide: 'haha',
-      doctorFullName: 'doctor name',
-      doctorWorkPlace: 'emch',
-      doctorRegNum: 'yu12354678',
-      type: Type.mansuuruulah,
-      created: DateTime.now(),
-    ),
-  ];
-
   final _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final pills = Provider.of<PillProvider>(context, listen: false).pills;
+
     return Container(
       child: Column(
         children: <Widget>[
@@ -89,7 +54,7 @@ class PillScreen extends StatelessWidget {
                   trailing: IconButton(
                     icon: Icon(Icons.keyboard_arrow_right),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(PillDetail.routeName);
+                      Navigator.of(context).pushNamed(PillDetail.routeName, arguments: pills[index]);
                     },
                   ),
                 );

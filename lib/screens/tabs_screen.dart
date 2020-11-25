@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mini_med_front/providers/pill_provider.dart';
+import 'package:provider/provider.dart';
 
 import './main/history_screen.dart';
 import './main/home_screen.dart';
@@ -47,32 +49,35 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectPageIndex]['page'],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _selectPage,
-        unselectedItemColor: Theme.of(context).primaryColor,
-        selectedItemColor: Theme.of(context).accentColor,
-        currentIndex: _selectPageIndex,
-        type: BottomNavigationBarType.shifting,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Нүүр"),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.medical_services_outlined),
-            title: Text("Эмийн жор"),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
-            title: Text("Түүх"),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            title: Text("Профайл"),
-          ),
-        ],
+    return ChangeNotifierProvider(
+      create: (ctx) => PillProvider(),
+      child: Scaffold(
+        body: _pages[_selectPageIndex]['page'],
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: _selectPage,
+          unselectedItemColor: Theme.of(context).primaryColor,
+          selectedItemColor: Theme.of(context).accentColor,
+          currentIndex: _selectPageIndex,
+          type: BottomNavigationBarType.shifting,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text("Нүүр"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.medical_services_outlined),
+              title: Text("Эмийн жор"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.assignment),
+              title: Text("Түүх"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined),
+              title: Text("Профайл"),
+            ),
+          ],
+        ),
       ),
     );
   }
