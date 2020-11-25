@@ -3,7 +3,8 @@ class Prescription {
   final BigInt patientID; //Өвчтөний дугаар
   final BigInt hospitalID; //Эмнэлгийн дугаар
   final String pillName; //Эмийн нэр
-  final String guide; //Эм хэрэглэх заавар
+  final String rp;// тайлбар эмийн нэрс болон хэрэглэх заавар г.м
+  final String note;// тайлбар эмийн нэрс болон хэрэглэх заавар г.м
   final String doctorFullName; //Жор бичсэн эмчийн бүтэн нэр
   final String doctorWorkPlace; //Жор бичсэн эмчийн ажлын байрны нэршил
   final String doctorRegNum; //Жор бичсэн эмчийн регистрийн дугаар
@@ -15,7 +16,8 @@ class Prescription {
     this.patientID,
     this.hospitalID,
     this.pillName,
-    this.guide,
+    this.rp,
+    this.note,
     this.doctorFullName,
     this.doctorWorkPlace,
     this.doctorRegNum,

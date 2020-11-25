@@ -2,22 +2,30 @@ class Payment {
   final BigInt id;
   final BigInt patientID; //Өвчтөний дугаар
   final BigInt hospitalID; //Эмнэлгийн дугаар
-  final int price; //Төлбөр
-  final Type type; //Төлбөрийн төрөл
+  final String mainUuid; //
+
+  final double mainPrice; // нийт төлбөр
+  final double price; // төлөх төлбөр
+  final double discount; // хөнгөлөлт
+  final Status discountStatus; // хөнгөлөлтийн төрөл
   final DateTime created; //Төлбөр хийгдсэн огноо
 
   Payment({
     this.id,
     this.patientID,
     this.hospitalID,
+    this.mainUuid,
+    this.mainPrice,
     this.price,
-    this.type,
+    this.discount,
+    this.discountStatus,
     this.created,
   });
 }
 
-enum Type {
-  person, //Өөрөө
-  clinic, //Тасгийн хөнгөлөлт
-  diagnosis, //Оношийн хөнгөлөлт
+enum Status {
+  insuranceDiscount, //даатгал
+  organizationDiscount, //байгууллага
+  outPatientDiscount, //Тасгийн хөнгөлөлт
+  emergencyDiscount, //яаралтай хөнгөлөлт
 }

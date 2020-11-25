@@ -29,7 +29,7 @@ class PillDetail extends StatelessWidget {
 
             width: double.infinity,
             child: Text(
-              'Жор:\n ${pill.guide}',
+              'Жор:\n ${pill.rp}\n${pill.note}',
               softWrap: true,
             ),
           ),
