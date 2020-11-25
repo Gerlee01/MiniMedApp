@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './screens/pill_detail.dart';
+import 'package:mini_med_front/screens/history_sub/history_tab_screen.dart';
+import 'screens/pill_sub/pill_detail.dart';
 import './screens/tabs_screen.dart';
 import './screens/login_screen.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         TabsScreen.routeName: (ctx) => TabsScreen(),
         PillDetail.routeName: (ctx) => PillDetail(),
+        HistoryTabScreen.routeName: (ctx) => HistoryTabScreen(),
       },
     );
   }

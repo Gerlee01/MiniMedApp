@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../entity/History.dart';
-import '../widgets/history_item.dart';
+import '../../entity/History.dart';
+import '../../widgets/history_item.dart';
 
 class HistoryScreen extends StatelessWidget {
   List<Map<String, Object>> types = [

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
+class HistoryChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-
-      ],
+    return Container(
+      child: Text('chart'),
     );
   }
 }

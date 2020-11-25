@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../entity/Prescription.dart';
-import '../screens/pill_detail.dart';
+import '../../entity/Prescription.dart';
+import '../pill_sub/pill_detail.dart';
 
 class PillScreen extends StatelessWidget {
   final List<Prescription> pills = [

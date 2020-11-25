@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import './history_screen.dart';
-import './home_screen.dart';
-import './pill_screen.dart';
-import './profile_screen.dart';
+import './main/history_screen.dart';
+import './main/home_screen.dart';
+import './main/pill_screen.dart';
+import './main/profile_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs_screen';

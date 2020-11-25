@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_med_front/screens/history_sub/history_tab_screen.dart';
 
 import '../entity/History.dart';
 
@@ -9,10 +10,7 @@ class HistoryItem extends StatelessWidget {
   const HistoryItem(this.type, this.title);
 
   void selectCategory(BuildContext ctx) {
-    // Navigator.of(ctx).pushNamed(CategoryMealsScreen.routeName, arguments: {
-    //   'id': id,
-    //   'title': title,
-    // });
+    Navigator.of(ctx).pushNamed(HistoryTabScreen.routeName, arguments: title);
   }
 
   @override

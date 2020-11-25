@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_med_front/entity/Prescription.dart';
+import '../../entity/Prescription.dart';
 
 class PillDetail extends StatelessWidget {
   static const routeName = 'pill_detail';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_med_front/screens/tabs_screen.dart';
+import './tabs_screen.dart';
 
 import '../component/user/controller/UserController.dart';
 
