@@ -6,7 +6,17 @@ import 'package:mini_med_front/entity/User.dart';
 import 'package:mini_med_front/util/MConstants.dart';
 
 class UserController {
-  get token => null;
+  Future<List<User>> findAll() async {
+    String url = MConstants.mainService + "/user/all";
+    HttpClient httpClient = HttpClient();
+    HttpClientRequest request = await httpClient.getUrl(Uri.parse(url));
+    request.headers.set('Authorization', 'Bearer ' + MConstants.token);
+    HttpClientResponse response = await request.close();
+    if (response.statusCode != 200) return null;
+    List<dynamic> body =
+        jsonDecode(await response.transform(utf8.decoder).join());
+    return body.map((dynamic item) => User.fromJson(item)).toList();
+  }
 
   Future<User> findByUsernameAndPassword(
       String username, String password) async {
