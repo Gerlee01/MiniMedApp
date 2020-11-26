@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Login App',
       home: LoginScreen(),
       theme: ThemeData(
-        primarySwatch: Colors.pink,
+        primarySwatch: Colors.green,
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(fontSize: 20),

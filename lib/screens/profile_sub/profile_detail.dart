@@ -5,14 +5,12 @@ import 'package:mini_med_front/entity/Patient.dart';
 class ProfileDetail extends StatelessWidget {
   final _patient = Patient(
     id: BigInt.one,
-    uuid: 'uuid',
     firstName: 'gerlee',
     lastName: 'batzorig',
     regNum: 'ЕЮ00222501',
-    addressUuid: 'addressuuid',
     cardNo: 'cardno',
     mail: 'gerleebatzorig25@gmail.com',
-    phone: 9703634,
+    phone: '9703634',
     created: DateTime.now(),
   );
 
@@ -40,7 +38,6 @@ class ProfileDetail extends StatelessWidget {
           _buildRow('Регистрын №: ', _patient.regNum),
           _buildRow('Утас: ', _patient.phone.toString()),
           _buildRow('Имэйл: ', _patient.mail),
-          _buildRow('Хаяг: ', _patient.addressUuid),
         ],
       ),
     );

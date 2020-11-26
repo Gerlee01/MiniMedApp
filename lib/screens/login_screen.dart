@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './tabs_screen.dart';
 
-import '../component/user/controller/UserController.dart';
+import '../controller/UserController.dart';
 
 class LoginScreen extends StatelessWidget {
   final _userNameController = TextEditingController();

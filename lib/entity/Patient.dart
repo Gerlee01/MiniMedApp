@@ -1,25 +1,52 @@
 class Patient {
   final BigInt id;
-  final String uuid;
   final String firstName; //Өөрийн нэр
   final String lastName; //Овог
+  String cardNo; //Өвчтөний картын дугаар
+  String mail; //Имэйл хаяг
+  String phone; //Гар утасны дугаар
   final String regNum; //Регистрийн дугаар
-  final String addressUuid; //гэрийн хаяг
-  final String cardNo; //Өвчтөний картын дугаар
-  final String mail; //Имэйл хаяг
-  final int phone; //Гар утасны дугаар
+  final String city;
+  final String district;
+  final String khoroo;
+  String block; //Хороолол/гудамж
+  String number; //Тоот
+  String house; //Байр/хашаа
   final DateTime created; //Өвчтөнийг бүртгэж авсан огноо
 
   Patient({
     this.id,
-    this.uuid,
     this.firstName,
     this.lastName,
     this.regNum,
-    this.addressUuid,
     this.cardNo,
     this.mail,
     this.phone,
     this.created,
+    this.city,
+    this.district,
+    this.khoroo,
+    this.house,
+    this.block,
+    this.number,
   });
+
+  factory Patient.fromJson(Map<String, dynamic> json) {
+    return Patient(
+      id: json['id'] as BigInt,
+      firstName: json['firstName'] as String,
+      lastName: json['lastName'] as String,
+      regNum: json['regNum'] as String,
+      cardNo: json['cardNo'] as String,
+      mail: json['mail'] as String,
+      phone: json['phone'] as String,
+      created: json['created'] as DateTime,
+      city: json['city'] as String,
+      district: json['district'] as String,
+      khoroo: json['khoroo'] as String,
+      house: json['house'] as String,
+      block: json['block'] as String,
+      number: json['number'] as String,
+    );
+  }
 }

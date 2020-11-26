@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:mini_med_front/component/user/model/LoginRequest.dart';
+import 'file:///D:/diploma/project/mini_med_front/lib/util/LoginRequest.dart';
 import 'package:mini_med_front/entity/User.dart';
 import 'package:mini_med_front/util/MConstants.dart';
 
@@ -18,8 +18,7 @@ class UserController {
     return body.map((dynamic item) => User.fromJson(item)).toList();
   }
 
-  Future<User> findByUsernameAndPassword(
-      String username, String password) async {
+  Future<User> findByUsernameAndPassword(String username, String password) async {
     String url = MConstants.mainService + "/user/me";
     getToken(username, password);
     HttpClient httpClient = HttpClient();

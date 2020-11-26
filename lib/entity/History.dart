@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 
 class History {
   final BigInt id;
-  final String historyUuid; //үзлэг,шинжилгээ, оношилгооний uuid
-  final BigInt patientID; //Өвчтөний дугаар
-  final BigInt hospitalID; //Эмнэлгийн дугаар
   final DateTime targetDate; //Цаг авсан өдөр
   final TimeOfDay targetTime; //Авсан цаг
   final int targetNumber; //Авсан дугаар
@@ -16,9 +13,6 @@ class History {
 
   History({
     this.id,
-    this.historyUuid,
-    this.patientID,
-    this.hospitalID,
     this.targetDate,
     this.targetTime,
     this.targetNumber,

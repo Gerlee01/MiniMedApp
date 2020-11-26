@@ -24,15 +24,12 @@ class PaymentList extends StatelessWidget {
               itemBuilder: (ctx, index) => Column(
                 children: <Widget>[
                   ListTile(
-                    leading: payments[index].discount == 0
+                    leading: payments[index].getMainDiscount() == 0
                         ? Icon(Icons.payments_outlined)
                         : Icon(Icons.payment),
                     title: Text(
                         '${payments[index].mainPrice} / ${payments[index].price}'),
-                    subtitle: payments[index].discount == 0
-                        ? Text('${payments[index].stringStatus()}')
-                        : Text(
-                            '${payments[index].stringStatus()}: ${payments[index].discount}'),
+                    subtitle: Text('haha')
                   ),
                   Divider(),
                 ],

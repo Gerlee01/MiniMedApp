@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:mini_med_front/entity/Prescription.dart';
-import 'package:mini_med_front/test_data.dart';
 
 class PillProvider with ChangeNotifier{
-  List<Prescription> _pills = pillData.toList();
+  List<Prescription> _pills = [];
 
   List<Prescription> get pills {
     return [..._pills];

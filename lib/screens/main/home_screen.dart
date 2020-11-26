@@ -1,13 +1,24 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget{
+  final _markers = {
+    Marker(
+      markerId: MarkerId('id'),
+      position: LatLng(47.92145455759996, 106.91452048400859),
+      infoWindow: InfoWindow(
+        title: 'ТТАХНЭ',
+      ),
+    ),
+  };
+
   Completer<GoogleMapController> _controller = Completer();
 
   static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 10,
+    target: LatLng(47.92145455759996, 106.91452048400859),
+    zoom: 15,
   );
 
   @override
@@ -30,6 +41,7 @@ class HomeScreen extends StatelessWidget {
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
             },
+            markers: _markers.toSet(),
           ),
         ),
       ],
