@@ -13,7 +13,7 @@ class HistoryTabScreen extends StatefulWidget {
 }
 
 class _HistoryTabScreenState extends State<HistoryTabScreen> {
-  List<Map<String, Object>> _pages; //нүүр хуудсан дээр солигдох дэлгэцүүд
+  List<Map<String, Object>> _pages; //солигдох дэлгэцүүд
   int _selectPageIndex = 0;
   Type type;
 

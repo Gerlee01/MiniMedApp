@@ -4,7 +4,7 @@ import 'package:mini_med_front/entity/History.dart';
 import '../test_data.dart';
 
 class HistoryProvider with ChangeNotifier {
-  List<History> _histories = historyData.cast<History>().toList();
+  List<History> _histories = historyData.toList();
 
   List<History> get histories {
     return [..._histories];

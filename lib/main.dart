@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mini_med_front/screens/history_sub/history_detail.dart';
 import 'package:mini_med_front/screens/history_sub/history_tab_screen.dart';
-import 'screens/pill_sub/pill_detail.dart';
-import './screens/tabs_screen.dart';
+import 'package:mini_med_front/screens/profile_sub/payment_tabs_screen.dart';
+import 'package:mini_med_front/screens/profile_sub/profile_detail.dart';
+
 import './screens/login_screen.dart';
+import './screens/tabs_screen.dart';
+import 'screens/pill_sub/pill_detail.dart';
 
 ///love me too
 void main() {
@@ -30,6 +33,8 @@ class MyApp extends StatelessWidget {
         PillDetail.routeName: (ctx) => PillDetail(),
         HistoryTabScreen.routeName: (ctx) => HistoryTabScreen(),
         HistoryDetail.routeName: (ctx) => HistoryDetail(),
+        ProfileDetail.routeName: (ctx) => ProfileDetail(),
+        PaymentTabsScreen.routeName: (ctx) => PaymentTabsScreen(),
       },
     );
   }

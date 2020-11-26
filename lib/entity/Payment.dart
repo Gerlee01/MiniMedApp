@@ -21,9 +21,21 @@ class Payment {
     this.discountStatus,
     this.created,
   });
+
+  String stringStatus () {
+    switch(this.discountStatus){
+      case Status.insuranceDiscount : return 'Даатгалын хөнгөлөлт'; break;
+      case Status.organizationDiscount : return 'Байгууллагын хөнгөлөлт'; break;
+      case Status.outPatientDiscount : return 'Тасгийн хөнгөлөлт'; break;
+      case Status.emergencyDiscount : return 'Яаралтай хөнгөлөлт'; break;
+      default : return 'Хөнгөлөлт байхгүй';
+    }
+  }
+
 }
 
 enum Status {
+  none, //hungululttgvi
   insuranceDiscount, //даатгал
   organizationDiscount, //байгууллага
   outPatientDiscount, //Тасгийн хөнгөлөлт

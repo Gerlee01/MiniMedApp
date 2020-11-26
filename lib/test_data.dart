@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_med_front/entity/Payment.dart';
 
 import './entity/History.dart' as h;
 import './entity/Prescription.dart' as p;
@@ -10,7 +11,7 @@ var pillData = [
     hospitalID: BigInt.one,
     pillName: 'em',
     rp: 'haha',
-    note:'note noet',
+    note: 'note noet',
     doctorFullName: 'doctor name',
     doctorWorkPlace: 'emch',
     doctorRegNum: 'yu12354678',
@@ -23,7 +24,7 @@ var pillData = [
     hospitalID: BigInt.two,
     pillName: 'em22',
     rp: 'haha',
-    note:'note noet',
+    note: 'note noet',
     doctorFullName: 'doctor name',
     doctorWorkPlace: 'emch',
     doctorRegNum: 'yu12354678',
@@ -36,7 +37,7 @@ var pillData = [
     hospitalID: BigInt.from(6),
     pillName: 'em3',
     rp: 'haha',
-    note:'note noet',
+    note: 'note noet',
     doctorFullName: 'doctor name',
     doctorWorkPlace: 'emch',
     doctorRegNum: 'yu12354678',
@@ -83,6 +84,42 @@ var historyData = [
     pdf: 'D:/best/wow.png',
     status: h.Status.inactive,
     type: h.Type.pacs,
+    created: DateTime.now(),
+  ),
+];
+
+var paymentData = [
+  Payment(
+    id: BigInt.one,
+    patientID: BigInt.one,
+    hospitalID: BigInt.one,
+    mainUuid: 'uuid1',
+    mainPrice: 5000,
+    price: 0,
+    discount: 5000,
+    discountStatus: Status.emergencyDiscount,
+    created: DateTime.now(),
+  ),
+  Payment(
+    id: BigInt.two,
+    patientID: BigInt.two,
+    hospitalID: BigInt.two,
+    mainUuid: 'uuid2',
+    mainPrice: 1000,
+    price: 1000,
+    discount: 0,
+    discountStatus: Status.none,
+    created: DateTime.now(),
+  ),
+  Payment(
+    id: BigInt.from(3),
+    patientID: BigInt.from(3),
+    hospitalID: BigInt.from(3),
+    mainUuid: 'uuid3',
+    mainPrice: 3000,
+    price: 2000,
+    discount: 1000,
+    discountStatus: Status.insuranceDiscount,
     created: DateTime.now(),
   ),
 ];

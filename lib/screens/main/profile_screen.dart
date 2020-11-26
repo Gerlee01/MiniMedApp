@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mini_med_front/screens/profile_sub/payment_tabs_screen.dart';
+import 'package:mini_med_front/screens/profile_sub/profile_detail.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -29,7 +31,9 @@ class ProfileScreen extends StatelessWidget {
             title: Text('Төлбөрийн мэдээлэл харах'),
             trailing: IconButton(
               icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.of(context).pushNamed(PaymentTabsScreen.routeName);
+              },
             ),
           ),
         ),
@@ -39,7 +43,9 @@ class ProfileScreen extends StatelessWidget {
             title: Text('Хувийн мэдээлэл харах'),
             trailing: IconButton(
               icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.of(context).pushNamed(ProfileDetail.routeName);
+              },
             ),
           ),
         ),

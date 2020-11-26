@@ -26,23 +26,35 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Mini Med Login"),
       ),
-      body: Column(
-        children: <Widget>[
-          TextField(
-            decoration: InputDecoration(labelText: "Нэвтрэх нэр"),
-            controller: _userNameController,
-          ),
-          TextField(
-            decoration: InputDecoration(labelText: "Нууц үг"),
-            controller: _passwordController,
-          ),
-          RaisedButton(
-            child: Text("Нэвтрэх"),
-            onPressed: () => _submit(context),
-            color: Theme.of(context).primaryColor,
-            textColor: Colors.white,
-          ),
-        ],
+      body: Container(
+        margin: EdgeInsets.symmetric(vertical: 50, horizontal: 15),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Нэвтрэх нэр',
+                hintText: 'Нэвтрэх нэрээ оруулна уу!',
+              ),
+              controller: _userNameController,
+            ),
+            SizedBox(height: 10,),
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Нууц үг',
+                hintText: 'Нууц үгээ оруулна уу!',
+              ),
+              controller: _passwordController,
+            ),
+            RaisedButton(
+              child: Text("Нэвтрэх"),
+              onPressed: () => _submit(context),
+              color: Theme.of(context).primaryColor,
+              textColor: Colors.white,
+            ),
+          ],
+        ),
       ),
     );
   }
