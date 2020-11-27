@@ -1,10 +1,130 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:mini_med_front/controller/HistoryController.dart';
+import 'package:mini_med_front/entity/History.dart';
+import 'package:mini_med_front/models/chartHistoryModel.dart';
 
-class HistoryChart extends StatelessWidget {
+import 'indicator.dart';
+
+class HistoryChart extends StatefulWidget {
+  final Type type;
+
+  HistoryChart(this.type);
+
+  @override
+  State<StatefulWidget> createState() => _HistoryChartState();
+}
+
+class _HistoryChartState extends State<HistoryChart> {
+  int touchedIndex;
+  ChartHistoryModel _model = null;
+
+  @override
+  void initState() {
+    HistoryController controller = HistoryController();
+    controller.findChartValues(widget.type).then((model) {
+      if (model != null) {
+        setState(() {
+          _model = model;
+        });
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('chart'),
+    return AspectRatio(
+      aspectRatio: 1.3,
+      child: Card(
+        color: Colors.white,
+        child: _model == null ? Text('Мэдээлэл олдсонгүй') : Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 28,
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Indicator(
+                  color: const Color(0xff0293ee),
+                  text: 'Ирсэн',
+                  isSquare: false,
+                  size: touchedIndex == 0 ? 18 : 16,
+                  textColor: touchedIndex == 0 ? Colors.black : Colors.grey,
+                ),
+                Indicator(
+                  color: const Color(0xfff8b250),
+                  text: 'Ирээгүй',
+                  isSquare: false,
+                  size: touchedIndex == 1 ? 18 : 16,
+                  textColor: touchedIndex == 1 ? Colors.black : Colors.grey,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: PieChart(
+                  PieChartData(
+                      pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
+                        setState(() {
+                          if (pieTouchResponse.touchInput is FlLongPressEnd || pieTouchResponse.touchInput is FlPanEnd) {
+                            touchedIndex = -1;
+                          } else {
+                            touchedIndex = pieTouchResponse.touchedSectionIndex;
+                          }
+                        });
+                      }),
+                      startDegreeOffset: 180,
+                      borderData: FlBorderData(
+                        show: false,
+                      ),
+                      sectionsSpace: 12,
+                      centerSpaceRadius: 0,
+                      sections: showingSections()),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<PieChartSectionData> showingSections() {
+    return List.generate(2, (i) {
+        final isTouched = i == touchedIndex;
+        final double opacity = isTouched ? 1 : 0.6;
+        switch (i) {
+          case 0:
+            return PieChartSectionData(
+              color: const Color(0xff0293ee).withOpacity(opacity),
+              value: _model.irsen,
+              title: '',
+              radius: 120,
+              titleStyle: TextStyle(
+                  fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff044d7c)),
+              titlePositionPercentageOffset: 0.55,
+            );
+          case 1:
+            return PieChartSectionData(
+              color: const Color(0xfff8b250).withOpacity(opacity),
+              value: _model.ireegvi,
+              title: '',
+              radius: 105,
+              titleStyle: TextStyle(
+                  fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff90672d)),
+              titlePositionPercentageOffset: 0.55,
+            );
+          default:
+            return null;
+        }
+      },
     );
   }
 }

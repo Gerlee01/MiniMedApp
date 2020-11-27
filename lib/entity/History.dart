@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 
 class History {
-  final BigInt id;
+  final int id;
   final DateTime targetDate; //Цаг авсан өдөр
-  final TimeOfDay targetTime; //Авсан цаг
+  final DateTime targetTime; //Авсан цаг
   final int targetNumber; //Авсан дугаар
   final String pdf; //Үзлэгийн дэлгэрэнгүй мэдээлэлтэй pdf файл
   final Status status; //Төлөв
@@ -21,6 +21,36 @@ class History {
     this.type,
     this.created,
   });
+
+  factory History.fromJson(Map<String, dynamic> json) {
+    return History(
+      id : json['id'] as int,
+      targetDate : DateTime.parse(json['targetDate'] as String),
+      targetTime : DateTime.parse(json['targetTime'] as String),
+      targetNumber : json['targetNumber'] as int,
+      pdf : json['pdf'] as String,
+      status : getStatusIndex(json['status'] as int),
+      type : getTypeIndex(json['type'] as int),
+      created: DateTime.parse(json['created'] as String),
+    );
+  }
+}
+
+Status getStatusIndex(int index){
+  switch (index){
+    case 0 : return Status.active;
+    case 1 : return Status.inactive;
+    default: return Status.active;
+  }
+}
+
+Type getTypeIndex(int index){
+  switch (index){
+    case 0 : return Type.ambulatory;
+    case 1 : return Type.analysis;
+    case 2 : return Type.pacs;
+    default: return Type.ambulatory;
+  }
 }
 
 enum Type {

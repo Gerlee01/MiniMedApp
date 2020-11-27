@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mini_med_front/providers/pill_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:mini_med_front/controller/PillController.dart';
 
 import '../../entity/Prescription.dart';
 import '../pill_sub/pill_detail.dart';
 
-class PillScreen extends StatelessWidget {
+class PillScreen extends StatefulWidget {
+  @override
+  _PillScreenState createState() => _PillScreenState();
+}
+
+class _PillScreenState extends State<PillScreen> {
   final _searchController = TextEditingController();
+  List<Prescription> _pills = [];
+
+  @override
+  void initState() {
+    PillController controller = PillController();
+    controller.findAll().then((pills) {
+      if (pills != null) {
+        setState(() {
+          _pills = pills;
+        });
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final pills = Provider.of<PillProvider>(context, listen: false).pills;
-
     return Container(
       child: Column(
         children: <Widget>[
@@ -41,20 +57,21 @@ class PillScreen extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: pills.length,
+              itemCount: _pills.length,
               itemBuilder: (ctx, index) {
                 return ListTile(
                   leading: CircleAvatar(
                     radius: 20,
-                    backgroundColor: _chooseLeadingColor(pills[index].type),
+                    backgroundColor: _chooseLeadingColor(_pills[index].type),
                   ),
-                  title: Text(pills[index].pillName),
+                  title: Text(_pills[index].pillName),
                   subtitle: Text(DateFormat('yyyy оны MM сарын dd')
-                      .format(pills[index].created)),
+                      .format(_pills[index].created)),
                   trailing: IconButton(
                     icon: Icon(Icons.keyboard_arrow_right),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(PillDetail.routeName, arguments: pills[index]);
+                      Navigator.of(context).pushNamed(PillDetail.routeName,
+                          arguments: _pills[index]);
                     },
                   ),
                 );

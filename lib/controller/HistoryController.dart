@@ -1,25 +1,25 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:mini_med_front/entity/Payment.dart';
-import 'package:mini_med_front/models/chartPaymentModel.dart';
+import 'package:mini_med_front/entity/History.dart';
+import 'package:mini_med_front/models/chartHistoryModel.dart';
 import 'package:mini_med_front/util/MConstants.dart';
 
-class PaymentController{
-  Future<List<Payment>> findAll() async {
-    String url = MConstants.mainService + "/payment/all";
+class HistoryController {
+  Future<List<History>> findAll(Type type) async {
+    String url = MConstants.mainService + "/history/all/" + type.toString().substring(5, type.toString().length);
     HttpClient httpClient = HttpClient();
     HttpClientRequest request = await httpClient.getUrl(Uri.parse(url));
     request.headers.set('Authorization', 'Bearer ' + MConstants.token);
     HttpClientResponse response = await request.close();
     if (response.statusCode != 200) return null;
     List<dynamic> body =
-    jsonDecode(await response.transform(utf8.decoder).join());
-    return body.map((dynamic item) => Payment.fromJson(item)).toList();
+        jsonDecode(await response.transform(utf8.decoder).join());
+    return body.map((dynamic item) => History.fromJson(item)).toList();
   }
 
-  Future<ChartPaymentModel> findChartValues() async {
-    String url = MConstants.mainService + "/payment/chart";
+  Future<ChartHistoryModel> findChartValues(Type type) async {
+    String url = MConstants.mainService + "/history/chart/" + type.toString().substring(5, type.toString().length);
     HttpClient httpClient = HttpClient();
     HttpClientRequest request = await httpClient.getUrl(Uri.parse(url));
     request.headers.set('Authorization', 'Bearer ' + MConstants.token);
@@ -28,6 +28,6 @@ class PaymentController{
 
     Map<String, dynamic> map = json.decode(await response.transform(utf8.decoder).join());
     httpClient.close();
-    return ChartPaymentModel.fromJson(map);
+    return ChartHistoryModel.fromJson(map);
   }
 }

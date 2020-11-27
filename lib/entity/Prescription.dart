@@ -1,5 +1,5 @@
 class Prescription {
-  final BigInt id;
+  final int id;
   final String pillName; //Эмийн нэр
   final String diagnosis; //Онош
 
@@ -51,6 +51,34 @@ class Prescription {
     this.created,
   });
 
+  factory Prescription.fromJson(Map<String, dynamic> json) {
+    return Prescription(
+      id: json['id'] as int,
+      pillName: json['pillName'] as String,
+      diagnosis: json['diagnosis'] as String,
+      rp: json['rp'] as String,
+      note: json['note'] as String,
+      parmokokinetik: json['parmokokinetik'] as String,
+      parmakodinamik: json['parmakodinamik'] as String,
+      arga: json['arga'] as String,
+      usedtun: json['usedtun'] as String,
+      usedtunMax: json['usedtunMax'] as String,
+      nuloo: json['nuloo'] as String,
+      tseerlelt: json['tseerlelt'] as String,
+      nemelt: json['nemelt'] as String,
+      uilchlel: json['uilchlel'] as String,
+      zaalt: json['zaalt'] as String,
+      pregnantZaalt: json['pregnantZaalt'] as String,
+      olgoh: json['olgoh'] as String,
+      hadgalah: json['hadgalah'] as String,
+      doctorFullName: json['doctorFullName'] as String,
+      doctorWorkPlace: json['doctorWorkPlace'] as String,
+      doctorRegNum: json['doctorRegNum'] as String,
+      type: getTypeIndex(json['type'] as int),
+      created: DateTime.parse(json['created'] as String),
+    );
+  }
+
   String stringType() {
     switch (this.type) {
       case Type.normal:
@@ -65,6 +93,14 @@ class Prescription {
   }
 }
 
+Type getTypeIndex(int index){
+  switch (index){
+    case 0 : return Type.normal;
+    case 1 : return Type.setgets;
+    case 2 : return Type.mansuuruulah;
+    default: return Type.normal;
+  }
+}
 enum Type {
   normal, //Энгийн
   setgets, //Сэтгэцэд нөлөөт

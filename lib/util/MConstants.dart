@@ -7,4 +7,5 @@ class MConstants {
   static void setToken(String _token) {
     token = _token;
   }
+
 }
