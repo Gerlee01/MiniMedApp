@@ -3,21 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:mini_med_front/entity/Patient.dart';
 
 class ProfileDetail extends StatelessWidget {
-  final _patient = Patient(
-    id: BigInt.one,
-    firstName: 'gerlee',
-    lastName: 'batzorig',
-    regNum: 'ЕЮ00222501',
-    cardNo: 'cardno',
-    mail: 'gerleebatzorig25@gmail.com',
-    phone: '9703634',
-    created: DateTime.now(),
-  );
-
   static const routeName = '/profile_detail';
 
   @override
   Widget build(BuildContext context) {
+    var  _patient = ModalRoute.of(context).settings.arguments as Patient;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Хувийн мэдээлэл'),
@@ -38,6 +28,9 @@ class ProfileDetail extends StatelessWidget {
           _buildRow('Регистрын №: ', _patient.regNum),
           _buildRow('Утас: ', _patient.phone.toString()),
           _buildRow('Имэйл: ', _patient.mail),
+          _buildRow('Аймаг/Хот: ', _patient.city),
+          _buildRow('Сум/Дүүрэг: ', _patient.district),
+          _buildRow('Баг/Хороо: ', _patient.khoroo),
         ],
       ),
     );

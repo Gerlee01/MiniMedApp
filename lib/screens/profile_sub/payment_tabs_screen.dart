@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mini_med_front/providers/payment_provider.dart';
+import 'package:mini_med_front/controller/PaymentController.dart';
+import 'package:mini_med_front/entity/Payment.dart';
 import 'package:mini_med_front/widgets/payment_chart.dart';
 import 'package:mini_med_front/widgets/payment_list.dart';
-import 'package:provider/provider.dart';
 
 class PaymentTabsScreen extends StatefulWidget {
   static const routeName = '/payment_tabs_screen';
@@ -21,7 +21,8 @@ class _PaymentTabsScreenState extends State<PaymentTabsScreen> {
       'page': PaymentChart(),
       'title': 'График',
     },
-  ]; //солигдох дэлгэцүүд
+  ];
+
   int _selectPageIndex = 0;
 
   Widget _buildButton(int i) {
@@ -60,11 +61,8 @@ class _PaymentTabsScreenState extends State<PaymentTabsScreen> {
               _buildButton(1),
             ],
           ),
-          ChangeNotifierProvider(
-            create: (ctx) => PaymentProvider(),
-            child: Expanded(
-              child: _pages[_selectPageIndex]['page'],
-            ),
+          Expanded(
+            child: _pages[_selectPageIndex]['page'],
           ),
         ],
       ),

@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:mini_med_front/providers/payment_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:mini_med_front/controller/PaymentController.dart';
+import 'package:mini_med_front/entity/Payment.dart';
 
-class PaymentList extends StatelessWidget {
+class PaymentList extends StatefulWidget{
+  @override
+  PaymentListSate createState() => PaymentListSate();
+}
+
+class PaymentListSate extends State<PaymentList> {
+  List<Payment> _payments;
+  @override
+  void initState() {
+    PaymentController controller = PaymentController();
+    controller.findAll().then((payments) {
+      if (payments != null) {
+        setState(() {
+          _payments = payments;
+        });
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final payments =
-        Provider.of<PaymentProvider>(context, listen: false).payments;
-
-    return payments == null
+    return _payments == null
         ? Text('sorry')
         : Container(
             decoration: BoxDecoration(
@@ -20,17 +36,16 @@ class PaymentList extends StatelessWidget {
             padding: EdgeInsets.all(10),
             width: double.infinity,
             child: ListView.builder(
-              itemCount: payments.length,
+              itemCount: _payments.length,
               itemBuilder: (ctx, index) => Column(
                 children: <Widget>[
                   ListTile(
-                    leading: payments[index].getMainDiscount() == 0
-                        ? Icon(Icons.payments_outlined)
-                        : Icon(Icons.payment),
-                    title: Text(
-                        '${payments[index].mainPrice} / ${payments[index].price}'),
-                    subtitle: Text('haha')
-                  ),
+                      leading: _payments[index].getMainDiscount() == 0
+                          ? Icon(Icons.payments_outlined)
+                          : Icon(Icons.payment),
+                      title: Text(
+                          '${_payments[index].mainPrice} / ${_payments[index].price}'),
+                      subtitle: Text('haha')),
                   Divider(),
                 ],
               ),

@@ -1,5 +1,5 @@
 class Patient {
-  final BigInt id;
+  final int id;
   final String firstName; //Өөрийн нэр
   final String lastName; //Овог
   String cardNo; //Өвчтөний картын дугаар
@@ -12,7 +12,7 @@ class Patient {
   String block; //Хороолол/гудамж
   String number; //Тоот
   String house; //Байр/хашаа
-  final DateTime created; //Өвчтөнийг бүртгэж авсан огноо
+  DateTime created; //Өвчтөнийг бүртгэж авсан огноо
 
   Patient({
     this.id,
@@ -22,7 +22,7 @@ class Patient {
     this.cardNo,
     this.mail,
     this.phone,
-    this.created,
+    created,
     this.city,
     this.district,
     this.khoroo,
@@ -33,20 +33,20 @@ class Patient {
 
   factory Patient.fromJson(Map<String, dynamic> json) {
     return Patient(
-      id: json['id'] as BigInt,
+      id: json['id'] as int,
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       regNum: json['regNum'] as String,
       cardNo: json['cardNo'] as String,
       mail: json['mail'] as String,
       phone: json['phone'] as String,
-      created: json['created'] as DateTime,
       city: json['city'] as String,
       district: json['district'] as String,
       khoroo: json['khoroo'] as String,
       house: json['house'] as String,
       block: json['block'] as String,
       number: json['number'] as String,
+      created: json['created'] as String,
     );
   }
 }

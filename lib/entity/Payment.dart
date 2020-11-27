@@ -1,8 +1,7 @@
-
 import 'dart:core';
 
 class Payment {
-  final BigInt id;
+  final int id;
   final double price; // төлөх төлбөр
   double discountPack; // Багцын хөнгөлөлт // 1.
   double discountVip; // Эрхийн хөнгөлөлт // 2.
@@ -34,12 +33,43 @@ class Payment {
   });
 
   double getMainDiscount() {
-    return discountDiagnosis + discountVip + discountPack + discountEmergency + discountOutPatient + discountRepeat
-        + discountFamily + discountPercent + discountInsurance;
+    return discountDiagnosis +
+        discountVip +
+        discountPack +
+        discountEmergency +
+        discountOutPatient +
+        discountRepeat +
+        discountFamily +
+        discountPercent +
+        discountInsurance;
   }
 
   double getTotalDiscount() {
-    return discountDiagnosis + discountVip + discountPack + discountEmergency + discountOutPatient + discountRepeat
-        + discountFamily + discountPercent;
+    return discountDiagnosis +
+        discountVip +
+        discountPack +
+        discountEmergency +
+        discountOutPatient +
+        discountRepeat +
+        discountFamily +
+        discountPercent;
+  }
+
+  factory Payment.fromJson(Map<String, dynamic> json) {
+    return Payment(
+      id: json['id'] as int,
+      mainPrice: json['mainPrice'] as double,
+      price: json['price'] as double,
+      discountPack: json['discountPack'] as double,
+      discountVip: json['discountVip'] as double,
+      discountEmergency: json['discountEmergency'] as double,
+      discountOutPatient: json['discountOutPatient'] as double,
+      discountDiagnosis: json['discountDiagnosis'] as double,
+      discountInsurance: json['discountInsurance'] as double,
+      discountRepeat: json['discountRepeat'] as double,
+      discountFamily: json['discountFamily'] as double,
+      discountPercent: json['discountPercent'] as double,
+      created: DateTime.parse(json['created'] as String),
+    );
   }
 }

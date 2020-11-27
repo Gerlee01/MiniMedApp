@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:mini_med_front/controller/PatientController.dart';
 import 'package:mini_med_front/screens/profile_sub/payment_tabs_screen.dart';
 import 'package:mini_med_front/screens/profile_sub/profile_detail.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  ProfileScreenState createState() => ProfileScreenState();
+}
+
+class ProfileScreenState extends State<ProfileScreen> {
+  var patient;
+
+  @override
+  void initState() {
+    PatientController controller = PatientController();
+    controller.findPatient().then((patient) {
+      if (patient != null) {
+        setState(() {
+          this.patient = patient;
+        });
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         Container(
+          width: double.infinity,
+          height: 100,
           margin: EdgeInsets.only(top: 50),
           child: Row(
             children: <Widget>[
@@ -16,10 +39,10 @@ class ProfileScreen extends StatelessWidget {
               ),
               Column(
                 children: <Widget>[
-                  Text('Овог нэр'),
-                  Text('96969696'),
-                  Text('gerleebatzorig25@gmail.com'),
-                  Text('123456'),
+                  Text(patient == null ? '' : '${patient.lastName} ${patient.firstName}'),
+                  Text(patient == null ? '' : '${patient.phone}'),
+                  Text(patient == null ? '' : '${patient.mail}'),
+                  Text(patient == null ? '' : '${patient.cardNo}'),
                 ],
               ),
             ],
@@ -31,7 +54,7 @@ class ProfileScreen extends StatelessWidget {
             title: Text('Төлбөрийн мэдээлэл харах'),
             trailing: IconButton(
               icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: (){
+              onPressed: () {
                 Navigator.of(context).pushNamed(PaymentTabsScreen.routeName);
               },
             ),
@@ -43,8 +66,9 @@ class ProfileScreen extends StatelessWidget {
             title: Text('Хувийн мэдээлэл харах'),
             trailing: IconButton(
               icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: (){
-                Navigator.of(context).pushNamed(ProfileDetail.routeName);
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(ProfileDetail.routeName, arguments: patient);
               },
             ),
           ),
@@ -56,7 +80,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: (){
+          onTap: () {
             Navigator.of(context).pushReplacementNamed('/');
           },
           child: Card(
