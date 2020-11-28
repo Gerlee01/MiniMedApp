@@ -13,7 +13,7 @@ class HistoryDetail extends StatelessWidget {
       ),
       body: Container(
         color: Colors.white,
-        child: Image.network(url),
+        child: Text('Энд pdf оруулчих юмсандааа T.T'),
       ),
     );
   }
