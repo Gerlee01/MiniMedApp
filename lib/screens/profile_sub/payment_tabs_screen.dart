@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mini_med_front/controller/PaymentController.dart';
-import 'package:mini_med_front/entity/Payment.dart';
 import 'package:mini_med_front/widgets/payment_chart.dart';
 import 'package:mini_med_front/widgets/payment_list.dart';
 
@@ -27,12 +25,19 @@ class _PaymentTabsScreenState extends State<PaymentTabsScreen> {
 
   Widget _buildButton(int i) {
     return Container(
-      width: 160,
+      width: MediaQuery.of(context).size.width / 2,
       child: RaisedButton(
-        child: Text(i == 0 ? 'Жагсаалт' : 'График'),
+        child: Text(
+          i == 0 ? 'Жагсаалт' : 'График',
+          style: TextStyle(
+            color: _selectPageIndex != i
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).primaryColorDark,
+          ),
+        ),
         color: _selectPageIndex == i
-            ? Theme.of(context).primaryColor
-            : Colors.white,
+            ? Colors.white
+            : Theme.of(context).primaryColorLight,
         onPressed: () {
           if (_selectPageIndex == i)
             return;
@@ -52,19 +57,23 @@ class _PaymentTabsScreenState extends State<PaymentTabsScreen> {
       appBar: AppBar(
         title: const Text('Төлбөрийн мэдээлэл'),
       ),
-      body: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              _buildButton(0),
-              _buildButton(1),
-            ],
-          ),
-          Expanded(
-            child: _pages[_selectPageIndex]['page'],
-          ),
-        ],
+      body: Container(
+        color: Theme.of(context).primaryColorLight,
+        width: double.infinity,
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                _buildButton(0),
+                _buildButton(1),
+              ],
+            ),
+            Expanded(
+              child: _pages[_selectPageIndex]['page'],
+            ),
+          ],
+        ),
       ),
     );
   }

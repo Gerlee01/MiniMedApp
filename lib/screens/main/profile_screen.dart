@@ -29,66 +29,132 @@ class ProfileScreenState extends State<ProfileScreen> {
     return Column(
       children: <Widget>[
         Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+            ),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Theme.of(context).primaryColor,
+                Theme.of(context).primaryColorLight,
+              ],
+            ),
+          ),
           width: double.infinity,
-          height: 100,
-          margin: EdgeInsets.only(top: 50),
+          height: 220,
+          padding: EdgeInsets.only(top: 60, right: 10, left: 10, bottom: 50),
+          alignment: Alignment.center,
           child: Row(
             children: <Widget>[
               CircleAvatar(
-                child: Icon(Icons.account_circle),
+                child: Icon(
+                  Icons.account_circle,
+                  size: 70,
+                ),
+                radius: 41,
               ),
-              Column(
-                children: <Widget>[
-                  Text(patient == null ? '' : '${patient.lastName} ${patient.firstName}'),
-                  Text(patient == null ? '' : '${patient.phone}'),
-                  Text(patient == null ? '' : '${patient.mail}'),
-                  Text(patient == null ? '' : '${patient.cardNo}'),
-                ],
+              SizedBox(
+                width: 30,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      patient == null
+                          ? ''
+                          : '${patient.lastName} ${patient.firstName}',
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    _buildTextAndIcon(
+                      patient == null ? '' : '${patient.phone}',
+                      Icons.phone,
+                    ),
+                    _buildTextAndIcon(
+                      patient == null ? '' : '${patient.mail}',
+                      Icons.mail,
+                    ),
+                    _buildTextAndIcon(
+                      patient == null ? '' : '${patient.cardNo}',
+                      Icons.attach_file,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
-        Card(
-          child: ListTile(
-            leading: Icon(Icons.credit_card_rounded),
-            title: Text('Төлбөрийн мэдээлэл харах'),
-            trailing: IconButton(
-              icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: () {
-                Navigator.of(context).pushNamed(PaymentTabsScreen.routeName);
-              },
+        Expanded(
+          child: Container(
+            width: double.infinity,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.credit_card_rounded),
+                    title: Text('Төлбөрийн мэдээлэл харах'),
+                    trailing: IconButton(
+                      icon: Icon(Icons.keyboard_arrow_right),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(PaymentTabsScreen.routeName);
+                      },
+                    ),
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.create),
+                    title: Text('Хувийн мэдээлэл харах'),
+                    trailing: IconButton(
+                      icon: Icon(Icons.keyboard_arrow_right),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(
+                            ProfileDetail.routeName,
+                            arguments: patient);
+                      },
+                    ),
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.translate_sharp),
+                    title: Text('Change Language'),
+                  ),
+                  Divider(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacementNamed('/');
+                    },
+                    child: ListTile(
+                      leading: Icon(Icons.exit_to_app),
+                      title: Text('Гарах'),
+                    ),
+                  ),
+                  Divider(),
+                ],
+              ),
             ),
           ),
         ),
-        Card(
-          child: ListTile(
-            leading: Icon(Icons.create),
-            title: Text('Хувийн мэдээлэл харах'),
-            trailing: IconButton(
-              icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(ProfileDetail.routeName, arguments: patient);
-              },
-            ),
-          ),
+      ],
+    );
+  }
+
+  Widget _buildTextAndIcon(String title, IconData icon) {
+    return Row(
+      children: [
+        Icon(
+          icon,
+          color: Colors.white,
         ),
-        Card(
-          child: ListTile(
-            leading: Icon(Icons.translate_sharp),
-            title: Text('Change Language'),
-          ),
+        SizedBox(
+          width: 6,
         ),
-        InkWell(
-          onTap: () {
-            Navigator.of(context).pushReplacementNamed('/');
-          },
-          child: Card(
-            child: ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Гарах'),
-            ),
-          ),
+        Text(
+          title,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
       ],
     );

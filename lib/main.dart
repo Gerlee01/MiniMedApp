@@ -21,6 +21,20 @@ class MyApp extends StatelessWidget {
       home: LoginScreen(),
       theme: ThemeData(
         primarySwatch: Colors.green,
+        accentColor: Colors.amber,
+        canvasColor: Colors.white,
+        textTheme: ThemeData.light().textTheme.copyWith(
+          bodyText1: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+          bodyText2: TextStyle(
+            fontSize: 15,
+            color: Colors.black54,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(fontSize: 20),
