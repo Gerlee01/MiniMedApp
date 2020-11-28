@@ -32,30 +32,37 @@ class HistoryListState extends State<HistoryList> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: ListView.builder(
         itemCount: _histories.length,
-        itemBuilder: (ctx, index) => Card(
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: _histories[index].status == Status.active
-                  ? Colors.green
-                  : Colors.deepOrange,
-              child: FittedBox(
-                child: Text(
-                  '${_histories[index].targetTime == null ? _histories[index].targetNumber : '${_histories[index].targetTime.hour}:${_histories[index].targetTime.minute}'}',
-                  style: TextStyle(color: Colors.white),
+        itemBuilder: (ctx, index) => Column(
+          children: [
+            ListTile(
+              leading: CircleAvatar(
+                backgroundColor: _histories[index].status == Status.active
+                    ? Colors.green
+                    : Colors.deepOrange,
+                child: FittedBox(
+                  child: Text(
+                    '${_histories[index].targetTime == null ? _histories[index].targetNumber : '${_histories[index].targetTime.hour}:${_histories[index].targetTime.minute}'}',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
+              title: Text(
+                  '${DateFormat('yyyy-MM-dd ').format(_histories[index].targetDate)}'),
+              trailing: IconButton(
+                icon: Icon(Icons.keyboard_arrow_right),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(HistoryDetail.routeName, arguments: _histories[index].pdf);
+                },
+              ),
             ),
-            title: Text(
-                '${DateFormat('yyyy-MM-dd ').format(_histories[index].targetDate)}'),
-            trailing: IconButton(
-              icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: () {
-                Navigator.of(context).pushNamed(HistoryDetail.routeName, arguments: _histories[index].pdf);
-              },
-            ),
-          ),
+            Divider(),
+          ],
         ),
       ),
     );

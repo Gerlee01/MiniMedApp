@@ -21,9 +21,14 @@ class HistoryGridItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       child: Container(
         padding: const EdgeInsets.all(10),
+        alignment: Alignment.center,
         child: Text(
           title,
-          style: Theme.of(context).textTheme.title,
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         decoration: BoxDecoration(
           gradient: LinearGradient(

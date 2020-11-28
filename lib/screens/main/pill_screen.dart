@@ -59,21 +59,23 @@ class _PillScreenState extends State<PillScreen> {
             child: ListView.builder(
               itemCount: _pills.length,
               itemBuilder: (ctx, index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: _chooseLeadingColor(_pills[index].type),
-                  ),
-                  title: Text(_pills[index].pillName),
-                  subtitle: Text(DateFormat('yyyy оны MM сарын dd')
-                      .format(_pills[index].created)),
-                  trailing: IconButton(
-                    icon: Icon(Icons.keyboard_arrow_right),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(PillDetail.routeName,
-                          arguments: _pills[index]);
-                    },
-                  ),
+                return Column(
+                  children: [
+                    ListTile(
+                      leading: _chooseLeadingColor(_pills[index].type),
+                      title: Text(_pills[index].pillName),
+                      subtitle: Text(DateFormat('yyyy оны MM сарын dd')
+                          .format(_pills[index].created)),
+                      trailing: IconButton(
+                        icon: Icon(Icons.keyboard_arrow_right),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(PillDetail.routeName,
+                              arguments: _pills[index]);
+                        },
+                      ),
+                    ),
+                    Divider(),
+                  ],
                 );
               },
             ),
@@ -83,16 +85,40 @@ class _PillScreenState extends State<PillScreen> {
     );
   }
 
-  Color _chooseLeadingColor(Type type) {
+  CircleAvatar _chooseLeadingColor(Type type) {
     switch (type) {
       case Type.normal:
-        return Colors.green;
+        return CircleAvatar(
+          radius: 20,
+          backgroundColor: Colors.green,
+          child: Icon(
+            Icons.accessibility_sharp,
+            color: Colors.white,
+          ),
+        );
       case Type.setgets:
-        return Colors.blueAccent;
+        return CircleAvatar(
+          radius: 20,
+          backgroundColor: Colors.blueAccent,
+          child: Icon(
+            Icons.airline_seat_recline_extra,
+            color: Colors.white,
+          ),
+        );
       case Type.mansuuruulah:
-        return Colors.red;
+        return CircleAvatar(
+          radius: 20,
+          backgroundColor: Colors.red,
+          child: Icon(
+            Icons.airline_seat_individual_suite_rounded,
+            color: Colors.white,
+          ),
+        );
       default:
-        return Colors.white54;
+        return CircleAvatar(
+          radius: 20,
+          backgroundColor: Colors.white54,
+        );
     }
   }
 }

@@ -42,12 +42,19 @@ class _HistoryTabScreenState extends State<HistoryTabScreen> {
 
   Widget _buildButton(int i) {
     return Container(
-      width: 160,
+      width: MediaQuery.of(context).size.width / 2,
       child: RaisedButton(
-        child: Text(i == 0 ? 'Жагсаалт' : 'График'),
+        child: Text(
+          i == 0 ? 'Жагсаалт' : 'График',
+          style: TextStyle(
+            color: _selectPageIndex != i
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).primaryColorDark,
+          ),
+        ),
         color: _selectPageIndex == i
-            ? Theme.of(context).primaryColor
-            : Colors.white,
+            ? Colors.white
+            : Theme.of(context).primaryColorLight,
         onPressed: () {
           if (_selectPageIndex == i)
             return;
@@ -67,19 +74,23 @@ class _HistoryTabScreenState extends State<HistoryTabScreen> {
       appBar: AppBar(
         title: Text(typeString()),
       ),
-      body: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              _buildButton(0),
-              _buildButton(1),
-            ],
-          ),
-          Expanded(
-            child: _pages[_selectPageIndex]['page'],
-          ),
-        ],
+      body: Container(
+        color: Theme.of(context).primaryColorLight,
+        width: double.infinity,
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                _buildButton(0),
+                _buildButton(1),
+              ],
+            ),
+            Expanded(
+              child: _pages[_selectPageIndex]['page'],
+            ),
+          ],
+        ),
       ),
     );
   }
