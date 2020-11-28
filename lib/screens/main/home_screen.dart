@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mini_med_front/widgets/carousel_slider_widget.dart';
 
-class HomeScreen extends StatelessWidget{
+class HomeScreen extends StatelessWidget {
   final _markers = {
     Marker(
       markerId: MarkerId('id'),
@@ -43,7 +44,7 @@ class HomeScreen extends StatelessWidget{
         children: <Widget>[
           Container(
             width: double.infinity,
-            height: 220,
+            height: 100,
             padding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),
             alignment: Alignment.topRight,
             child: IconButton(
@@ -51,21 +52,19 @@ class HomeScreen extends StatelessWidget{
               onPressed: () {},
             ),
           ),
-          Container(
-            width: double.infinity,
-            height: 200,
-            child: Image.network(
-                "https://cdn.pixabay.com/photo/2018/03/31/19/29/schnitzel-3279045_1280.jpg", fit: BoxFit.cover,),
-          ),
+          CarouselSliderWidget(),
           SizedBox(height: 10),
           Expanded(
-            child: GoogleMap(
-              mapType: MapType.hybrid,
-              initialCameraPosition: _kGooglePlex,
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-              markers: _markers.toSet(),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GoogleMap(
+                mapType: MapType.hybrid,
+                initialCameraPosition: _kGooglePlex,
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+                markers: _markers.toSet(),
+              ),
             ),
           ),
         ],

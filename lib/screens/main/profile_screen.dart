@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_med_front/controller/PatientController.dart';
 import 'package:mini_med_front/screens/profile_sub/payment_tabs_screen.dart';
 import 'package:mini_med_front/screens/profile_sub/profile_detail.dart';
+import 'package:mini_med_front/util/MConstants.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -125,6 +126,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                   Divider(),
                   InkWell(
                     onTap: () {
+                      MConstants.setToken('');
                       Navigator.of(context).pushReplacementNamed('/');
                     },
                     child: ListTile(
