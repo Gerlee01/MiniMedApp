@@ -8,4 +8,7 @@ class MConstants {
     token = _token;
   }
 
+  static String getToken() {
+    return token;
+  }
 }
