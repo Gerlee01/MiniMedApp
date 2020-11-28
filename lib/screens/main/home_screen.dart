@@ -23,28 +23,53 @@ class HomeScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        IconButton(
-          icon: Icon(Icons.notifications),
-          onPressed: () {},
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          bottomRight: Radius.circular(10),
         ),
-        Image.network(
-            "https://cdn.pixabay.com/photo/2018/03/31/19/29/schnitzel-3279045_1280.jpg"),
-        Container(
-          width: double.infinity,
-          height: 500,
-          child: GoogleMap(
-            mapType: MapType.hybrid,
-            initialCameraPosition: _kGooglePlex,
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-            markers: _markers.toSet(),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.center,
+          colors: [
+            Theme.of(context).primaryColor,
+            Colors.white,
+          ],
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            height: 220,
+            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),
+            alignment: Alignment.topRight,
+            child: IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () {},
+            ),
           ),
-        ),
-      ],
+          Container(
+            width: double.infinity,
+            height: 200,
+            child: Image.network(
+                "https://cdn.pixabay.com/photo/2018/03/31/19/29/schnitzel-3279045_1280.jpg", fit: BoxFit.cover,),
+          ),
+          SizedBox(height: 10),
+          Expanded(
+            child: GoogleMap(
+              mapType: MapType.hybrid,
+              initialCameraPosition: _kGooglePlex,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+              markers: _markers.toSet(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

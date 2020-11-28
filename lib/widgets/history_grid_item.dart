@@ -26,15 +26,15 @@ class HistoryGridItem extends StatelessWidget {
           title,
           style: TextStyle(
             fontSize: 20,
-            color: Colors.white,
+            color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.bold,
           ),
         ),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).primaryColorDark.withOpacity(0.7),
-              Theme.of(context).primaryColorLight,
+              Colors.white70,
+              Colors.white,
             ],
           ),
           borderRadius: BorderRadius.circular(15),
