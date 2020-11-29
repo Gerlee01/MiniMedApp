@@ -57,7 +57,7 @@ class HistoryListState extends State<HistoryList> {
               trailing: IconButton(
                 icon: Icon(Icons.keyboard_arrow_right),
                 onPressed: () {
-                  Navigator.of(context).pushNamed(HistoryDetail.routeName, arguments: _histories[index].pdf);
+                  Navigator.of(context).pushNamed(HistoryDetail.routeName, arguments: _histories[index].id);
                 },
               ),
             ),

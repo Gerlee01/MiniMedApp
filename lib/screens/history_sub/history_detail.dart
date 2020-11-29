@@ -6,7 +6,7 @@ class HistoryDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final url = ModalRoute.of(context).settings.arguments as String;
+    final historyId = ModalRoute.of(context).settings.arguments as int;
 
     return Scaffold(
       appBar: AppBar(
@@ -14,7 +14,7 @@ class HistoryDetail extends StatelessWidget {
       ),
       body: Container(
         color: Colors.white,
-        child: PdfViewer(),
+        child: PdfViewer(historyId),
       ),
     );
   }

@@ -3,6 +3,10 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:mini_med_front/controller/HistoryController.dart';
 
 class PdfViewer extends StatefulWidget {
+  final int historyId;
+
+  PdfViewer(this.historyId);
+
   @override
   PdfViewerState createState() => PdfViewerState();
 }
@@ -13,7 +17,7 @@ class PdfViewerState extends State<PdfViewer> {
   @override
   void initState() {
     HistoryController controller = HistoryController();
-    controller.findPdfById(1).then((value) {
+    controller.findPdfById(widget.historyId).then((value) {
       setState(() {
         localPath = value;
       });
