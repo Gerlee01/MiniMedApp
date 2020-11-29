@@ -28,6 +28,8 @@ dependencies:
   google_maps_flutter: ^0.5.21
   fl_chart: ^0.12.0
   carousel_slider: ^2.3.1
+  flutter_pdfview: ^1.0.0+10
+  path_provider: any
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,6 +46,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
