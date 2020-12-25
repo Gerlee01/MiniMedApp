@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mini_med_front/controller/PillController.dart';
@@ -12,6 +14,7 @@ class PillScreen extends StatefulWidget {
 
 class _PillScreenState extends State<PillScreen> {
   final _searchController = TextEditingController();
+  List<Prescription> _mainPills = [];
   List<Prescription> _pills = [];
 
   @override
@@ -19,12 +22,24 @@ class _PillScreenState extends State<PillScreen> {
     PillController controller = PillController();
     controller.findAll().then((pills) {
       if (pills != null) {
+        _mainPills = pills;
         setState(() {
-          _pills = pills;
+          _pills = _mainPills;
         });
       }
     });
     super.initState();
+  }
+
+  void search(){
+    if(_mainPills.isEmpty) return;
+    setState(() {
+      if(_searchController.text.isEmpty){
+        _pills = _mainPills;
+      } else {
+        _pills = _mainPills.where((element) => element.pillName.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
+      }
+    });
   }
 
   @override
@@ -44,7 +59,7 @@ class _PillScreenState extends State<PillScreen> {
               children: <Widget>[
                 IconButton(
                   icon: Icon(Icons.search),
-                  onPressed: () {},
+                  onPressed: search,
                 ),
                 Expanded(
                   child: TextField(

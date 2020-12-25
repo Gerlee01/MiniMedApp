@@ -1,6 +1,6 @@
 class MConstants {
   static final String mainService =
-      "http://192.168.42.247:4005/api"; //Үндсэн service
+      "http://124.158.110.117:4005/api"; //Үндсэн service
 
   static String token = ""; //token
 
