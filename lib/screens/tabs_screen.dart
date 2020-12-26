@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_med_front/screens/main/new_history_screen.dart';
 
 import './main/history_screen.dart';
 import './main/home_screen.dart';
@@ -28,7 +29,7 @@ class _TabsScreenState extends State<TabsScreen> {
         'title': 'Эмийн жор',
       },
       {
-        'page': HistoryScreen(),
+        'page': NewHistoryScreen(),
         'title': 'Түүх',
       },
       {

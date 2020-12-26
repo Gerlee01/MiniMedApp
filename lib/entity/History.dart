@@ -34,6 +34,15 @@ class History {
       created: DateTime.parse(json['created'] as String),
     );
   }
+
+  String getTypeName(){
+    switch (this.type){
+      case Type.ambulatory : return 'Үзлэг';
+      case Type.analysis : return 'Шинжилгээ';
+      case Type.pacs : return 'Оношилгоо';
+      default: return 'Тодорхойгүй';
+    }
+  }
 }
 
 Status getStatusIndex(int index){

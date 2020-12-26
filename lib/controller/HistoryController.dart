@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/services.dart';
 import 'package:mini_med_front/entity/History.dart';
 import 'package:mini_med_front/models/chartHistoryModel.dart';
 import 'package:mini_med_front/util/MConstants.dart';
@@ -10,8 +9,8 @@ import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 
 class HistoryController {
-  Future<List<History>> findAll(Type type) async {
-    String url = MConstants.mainService + "/history/all/" + type.toString().substring(5, type.toString().length);
+  Future<List<History>> findAll() async {
+    String url = MConstants.mainService + "/history/all";
     HttpClient httpClient = HttpClient();
     HttpClientRequest request = await httpClient.getUrl(Uri.parse(url));
     request.headers.set('Authorization', 'Bearer ' + MConstants.token);
