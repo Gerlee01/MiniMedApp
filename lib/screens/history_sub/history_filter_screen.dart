@@ -42,8 +42,8 @@ class _HistoryFilterScreenState extends State<HistoryFilterScreen> {
           Expanded(
             child: Text(
               i == 0
-                  ? '${DateFormat.yMd().format(DateTime.parse(model.startDate))}'
-                  : '${DateFormat.yMd().format(DateTime.parse(model.endTDate))}',
+                  ? '${DateFormat.yMd().format(model.startDate)}'
+                  : '${DateFormat.yMd().format(model.endTDate)}',
             ),
           ),
           IconButton(
@@ -59,7 +59,7 @@ class _HistoryFilterScreenState extends State<HistoryFilterScreen> {
                   return;
                 }
                 setState(() {
-                  i == 0 ? model.startDate = pickedDate.toIso8601String() : model.endTDate = pickedDate.toIso8601String();
+                  i == 0 ? model.startDate = pickedDate : model.endTDate = pickedDate;
                 });
               });
             },

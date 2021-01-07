@@ -1,8 +1,8 @@
 import '../entity/History.dart';
 
 class FilterModel {
-  String startDate;
-  String endTDate;
+  DateTime startDate;
+  DateTime endTDate;
   List<String> types;
   List<String> statuses;
 
@@ -54,8 +54,8 @@ class FilterModel {
   }
 
   Map<String, dynamic> toJson() => {
-    'startdate': startDate,
-    'enddate': endTDate,
+    'startdate': startDate.toIso8601String(),
+    'enddate': endTDate.toIso8601String(),
     'types': types,
     'statuses': statuses,
   };

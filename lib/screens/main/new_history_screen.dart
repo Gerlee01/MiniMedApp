@@ -21,8 +21,8 @@ class _NewHistoryScreenState extends State<NewHistoryScreen> {
   List<History> _histories = [];
 
   FilterModel filterModel = new FilterModel(
-    startDate: DateTime(DateTime.now().year, DateTime.now().month, 1).toIso8601String(),
-    endTDate: DateTime.now().toIso8601String(),
+    startDate: DateTime(DateTime.now().year, DateTime.now().month, 1),
+    endTDate: DateTime.now(),
     statuses: ['active', 'inactive'],
     types: ['ambulatory', 'analysis', 'pacs'],
   );
