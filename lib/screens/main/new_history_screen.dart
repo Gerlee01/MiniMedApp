@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mini_med_front/models/filterModel.dart';
 import 'package:mini_med_front/screens/history_sub/history_filter_screen.dart';
 
 import '../../controller/HistoryController.dart';
@@ -16,48 +17,33 @@ class NewHistoryScreen extends StatefulWidget {
 }
 
 class _NewHistoryScreenState extends State<NewHistoryScreen> {
-  List<History> _mainHistories = [];
+  HistoryController controller = HistoryController();
   List<History> _histories = [];
 
-  Map<String, Object> filters = {
-    'startDate': DateTime(DateTime.now().year, DateTime.now().month, 1),
-    'endDate': DateTime.now(),
-    'isAnalysis': true,
-    'isAmbulatory': true,
-    'isPacs': true,
-    'isCome': true,
-    'isNotCome': true,
-  };
+  FilterModel filterModel = new FilterModel(
+    startDate: DateTime(DateTime.now().year, DateTime.now().month, 1).toIso8601String(),
+    endTDate: DateTime.now().toIso8601String(),
+    statuses: ['active', 'inactive'],
+    types: ['ambulatory', 'analysis', 'pacs'],
+  );
 
-  void _setFilter(Map<String, Object> filter) {
-    setState(() {
-      filters = filter;
-      _histories = _mainHistories
-          .where((el) =>
-              el.targetDate.isBefore(filters['endDate']) &&
-              el.targetDate.isAfter(filters['startDate']) &&
-              (el.type == Type.ambulatory
-                  ? filters['isAmbulatory']
-                  : el.type == Type.analysis
-                      ? filters['isAnalysis']
-                      : el.type == Type.pacs ? filters['isPacs'] : false) &&
-              (el.status == Status.active
-                  ? filters['isCome']
-                  : el.status == Status.inactive
-                      ? filters['isNotCome']
-                      : false))
-          .toList();
+  void _setFilter(FilterModel filter) {
+    filterModel = filter;
+    controller.findAll(filterModel).then((histories) {
+      if (histories != null) {
+        setState(() {
+          _histories = histories;
+        });
+      }
     });
   }
 
   @override
   void initState() {
-    HistoryController controller = HistoryController();
-    controller.findAll().then((histories) {
+    controller.findAll(filterModel).then((histories) {
       if (histories != null) {
-        _mainHistories = histories;
         setState(() {
-          _histories = _mainHistories;
+          _histories = histories;
         });
       }
     });
@@ -77,7 +63,7 @@ class _NewHistoryScreenState extends State<NewHistoryScreen> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          HistoryFilterScreen(_setFilter, filters)),
+                          HistoryFilterScreen(_setFilter, filterModel)),
                 );
               })
         ],

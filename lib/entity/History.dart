@@ -1,6 +1,3 @@
-
-import 'package:flutter/material.dart';
-
 class History {
   final int id;
   final DateTime targetDate; //Цаг авсан өдөр

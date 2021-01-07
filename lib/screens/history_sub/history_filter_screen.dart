@@ -1,50 +1,33 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:intl/intl.dart';
+import 'package:mini_med_front/entity/History.dart';
+
+import '../../models/filterModel.dart';
 
 class HistoryFilterScreen extends StatefulWidget {
   final Function saveFilters;
-  final Map<String, Object> currentFilters;
+  final FilterModel currentModel;
 
-  const HistoryFilterScreen(this.saveFilters, this.currentFilters);
+  const HistoryFilterScreen(this.saveFilters, this.currentModel);
 
   @override
   _HistoryFilterScreenState createState() => _HistoryFilterScreenState();
 }
 
 class _HistoryFilterScreenState extends State<HistoryFilterScreen> {
-  DateTime _startDate = DateTime(DateTime.now().year, DateTime.now().month, 1);
-  DateTime _endDate = DateTime.now();
-  bool _isAnalysis = true;
-  bool _isAmbulatory = true;
-  bool _isPacs = true;
-  bool _isCome = true;
-  bool _isNotCome = true;
+  FilterModel model = new FilterModel();
+  List<String> typeString = [];
+  List<String> statusString = [];
 
   @override
   void initState() {
-    _startDate = widget.currentFilters['startDate'];
-    _endDate = widget.currentFilters['endDate'];
-    _isAnalysis = widget.currentFilters['isAnalysis'];
-    _isAmbulatory = widget.currentFilters['isAmbulatory'];
-    _isPacs = widget.currentFilters['isPacs'];
-    _isCome = widget.currentFilters['isCome'];
-    _isNotCome = widget.currentFilters['isNotCome'];
+    model = widget.currentModel;
+    typeString = model.getTypeString();
+    statusString = model.getStatusString();
     super.initState();
-  }
-
-  Widget _buildSwitchListTile(
-    String title,
-    String description,
-    bool currentValue,
-    Function updateValue,
-  ) {
-    return SwitchListTile(
-        title: Text(title),
-        value: currentValue,
-        subtitle: Text(description),
-        onChanged: updateValue);
   }
 
   Widget _buildDatePiker(int i, String title) {
@@ -59,8 +42,8 @@ class _HistoryFilterScreenState extends State<HistoryFilterScreen> {
           Expanded(
             child: Text(
               i == 0
-                  ? '${DateFormat.yMd().format(_startDate)}'
-                  : '${DateFormat.yMd().format(_endDate)}',
+                  ? '${DateFormat.yMd().format(DateTime.parse(model.startDate))}'
+                  : '${DateFormat.yMd().format(DateTime.parse(model.endTDate))}',
             ),
           ),
           IconButton(
@@ -76,7 +59,7 @@ class _HistoryFilterScreenState extends State<HistoryFilterScreen> {
                   return;
                 }
                 setState(() {
-                  i == 0 ? _startDate = pickedDate : _endDate = pickedDate;
+                  i == 0 ? model.startDate = pickedDate.toIso8601String() : model.endTDate = pickedDate.toIso8601String();
                 });
               });
             },
@@ -95,16 +78,9 @@ class _HistoryFilterScreenState extends State<HistoryFilterScreen> {
           IconButton(
             icon: Icon(Icons.save),
             onPressed: () {
-              final selectedFilters = {
-                'startDate': _startDate,
-                'endDate': _endDate,
-                'isAnalysis': _isAnalysis,
-                'isAmbulatory': _isAmbulatory,
-                'isPacs': _isPacs,
-                'isCome': _isCome,
-                'isNotCome': _isNotCome,
-              };
-              widget.saveFilters(selectedFilters);
+              model.setTypeString(typeString);
+              model.setStatusString(statusString);
+              widget.saveFilters(model);
               Navigator.pop(context);
             },
           )
@@ -116,55 +92,46 @@ class _HistoryFilterScreenState extends State<HistoryFilterScreen> {
             _buildDatePiker(0, 'Эхлэх огноо:'),
             _buildDatePiker(1, 'Дуусах огноо:'),
             Divider(),
-            _buildSwitchListTile(
-              'Амбулатор',
-              'Амбулаторын үзлэгүүдийг харах',
-              _isAmbulatory,
-              (newValue) {
-                setState(() {
-                  _isAmbulatory = newValue;
-                });
-              },
-            ),
-            _buildSwitchListTile(
-              'Шинжилгээ',
-              'Шинжилгээнүүдийг харах',
-              _isAnalysis,
-              (newValue) {
-                setState(() {
-                  _isAnalysis = newValue;
-                });
-              },
-            ),
-            _buildSwitchListTile(
-              'Оношилгоо',
-              'Оношилгоонуудыг харах',
-              _isPacs,
-              (newValue) {
-                setState(() {
-                  _isPacs = newValue;
-                });
+            CheckboxGroup(
+              orientation: GroupedButtonsOrientation.VERTICAL,
+              margin: const EdgeInsets.only(left: 12.0),
+              onSelected: (List selected) => setState(() {
+                typeString = selected;
+              }),
+              labels: <String>[
+                'Амбулатор',
+                'Шинжилгээ',
+                'Оношилгоо',
+              ],
+              checked: typeString,
+              itemBuilder: (Checkbox cb, Text txt, int i) {
+                return Row(
+                  children: <Widget>[
+                    cb,
+                    txt,
+                  ],
+                );
               },
             ),
             Divider(),
-            _buildSwitchListTile(
-              'Ирсэн',
-              'Цагтаа ирж үзүүлсэн',
-              _isCome,
-              (newValue) {
-                setState(() {
-                  _isCome = newValue;
-                });
-              },
-            ),
-            _buildSwitchListTile(
-              'Ирээгүй',
-              'Цагтаа ирж үзүүлээгүй',
-              _isNotCome,
-              (newValue) {
-                setState(() {
-                  _isNotCome = newValue;
-                });
+            CheckboxGroup(
+              orientation: GroupedButtonsOrientation.HORIZONTAL,
+              margin: const EdgeInsets.only(left: 12.0),
+              onSelected: (List selected) => setState(() {
+                statusString = selected;
+              }),
+              labels: <String>[
+                'Ирсэн',
+                'Ирээгүй',
+              ],
+              checked: statusString,
+              itemBuilder: (Checkbox cb, Text txt, int i) {
+                return Row(
+                  children: <Widget>[
+                    cb,
+                    txt,
+                  ],
+                );
               },
             ),
           ],

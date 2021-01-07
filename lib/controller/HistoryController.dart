@@ -3,17 +3,18 @@ import 'dart:io';
 
 import 'package:mini_med_front/entity/History.dart';
 import 'package:mini_med_front/models/chartHistoryModel.dart';
+import 'package:mini_med_front/models/filterModel.dart';
 import 'package:mini_med_front/util/MConstants.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 
 class HistoryController {
-  Future<List<History>> findAll() async {
+  Future<List<History>> findAll(FilterModel model) async {
     String url = MConstants.mainService + "/history/all";
     HttpClient httpClient = HttpClient();
-    HttpClientRequest request = await httpClient.getUrl(Uri.parse(url));
+    HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
     request.headers.set('Authorization', 'Bearer ' + MConstants.token);
+    request.add(utf8.encode(json.encode(model.toJson())));
     HttpClientResponse response = await request.close();
     if (response.statusCode != 200) return null;
     List<dynamic> body =

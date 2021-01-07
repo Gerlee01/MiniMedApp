@@ -19,13 +19,13 @@ class HistoryListState extends State<HistoryList> {
   @override
   void initState() {
     HistoryController controller = HistoryController();
-    controller.findAll().then((histories) {
-      if (histories != null) {
-        setState(() {
-          _histories = histories;
-        });
-      }
-    });
+    // controller.findAll().then((histories) {
+    //   if (histories != null) {
+    //     setState(() {
+    //       _histories = histories;
+    //     });
+    //   }
+    // });
     super.initState();
   }
 
